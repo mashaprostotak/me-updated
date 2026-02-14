@@ -47,8 +47,8 @@ function fixPathsInFile(filePath) {
     return `${attr}="${pathPrefix}${url}"`;
   });
   
-  // srcset and data-srcset attributes (for responsive images)
-  content = content.replace(/(srcset|data-srcset)=["']([^"']+)["']/g, (match, attr, srcsetValue) => {
+  // srcset, data-srcset, and srcSet (camelCase for noscript) attributes (for responsive images)
+  content = content.replace(/(srcset|data-srcset|srcSet)=["']([^"']+)["']/gi, (match, attr, srcsetValue) => {
     // Split by comma and process each URL in the srcset
     const fixedSrcset = srcsetValue.split(',').map(item => {
       const parts = item.trim().split(/\s+/);
